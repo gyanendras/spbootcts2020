@@ -87,6 +87,9 @@ class EmployeeDAOTest {
 				   sql, new EmployeeMapper());
 		System.out.println(l.get(0).getName());
 		Assertions.assertEquals(116, l.size());
+		
+		// jdb.execute(sql, action)
+		
 	}
 	
 
