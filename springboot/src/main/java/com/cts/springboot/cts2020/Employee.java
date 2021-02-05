@@ -6,6 +6,8 @@ public class Employee {
    //attributes/memeber variables/properties
 	private Long employeeId;
 	Double salary;
+	
+
 	LocalDate doj;
 	String fname;
 	String lname;
@@ -69,6 +71,10 @@ public class Employee {
 	public void setSalary(double sal) {
 		salary = sal;
 		
+	}
+	
+	public Double getSalary() {
+		return salary;
 	}
 
 	public String getName() {

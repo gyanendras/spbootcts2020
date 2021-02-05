@@ -38,10 +38,10 @@ public class EmployeeDAO {
 			st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from employees");
 			while(rs.next()) {
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getString(2));
-				System.out.println(rs.getString(3));
-				System.out.println(rs.getDate("hire_date"));
+				//System.out.println(rs.getString(1));
+				//System.out.println(rs.getString(2));
+				//System.out.println(rs.getString(3));
+				//System.out.println(rs.getDate("hire_date"));
 				
 				Employee emp = new Employee();
 				emp.setName(rs.getString(2), rs.getString(3));
