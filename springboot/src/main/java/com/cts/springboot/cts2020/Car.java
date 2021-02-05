@@ -2,6 +2,7 @@ package com.cts.springboot.cts2020;
 
 public class Car {
 	String name;
+	
 
 	@Override
 	public String toString() {

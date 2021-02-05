@@ -11,6 +11,7 @@
      <h2 style="color:Tomato;">
      <%= (new java.util.Date( ) ).toLocaleString( ) %>
      </h2> 
+     <h3>Visitor count is  <%=session.getAttribute("count") %></h3>
      <% int[] arr = new int[4];
        arr[3] = 1111; 
      System.out.println(arr[3]); 
