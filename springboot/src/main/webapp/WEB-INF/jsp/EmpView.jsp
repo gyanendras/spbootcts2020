@@ -1,33 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-     <%@ page import="java.util.*" %> 
-     <%@ page import="com.cts.springboot.cts2020.*" %> 
-     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.cts.springboot.cts2020.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
 </head>
 <body>
 
-<c:set var="empList"
-		value="<%=(List)request.getAttribute(\"eList\")%>" />  <!--   request.getParam("Model1"); -->
+	<c:set var="empList"
+		value="<%=(List) request.getAttribute(\"eList\")%>" />
+	<!--   request.getParam("Model1"); -->
 
-<table id="customers">
+	<table id="customers" class="table table-danger table-striped table-bordered" >
 		<tbody>
-			<tr>
+			<tr class="thead-dark">
 				<th>Name</th>
 				<th>Salary</th>
 			</tr>
 			<c:forEach var="emp" items="${empList}">
-			  
-			 <tr id="${emp.name}">
-			 	<td><c:out value="${emp.name}"></c:out></td>
+
+				<tr id="${emp.name}">
+					<td><c:out value="${emp.name}"></c:out></td>
 					<td><c:out value="${emp.salary}"></c:out></td>
-					<td><a href="addcart?name=${emp.name}&sal=${emp.salary}" target="_blank">Add to card</a></td>
+					<td><a class="btn btn-primary" href="addcart?name=${emp.name}&sal=${emp.salary}"
+						target="_blank">Add to cart</a></td>
 				</tr>
-							
+
 				<!-- <c:set var="emplist" value="${empList}" scope="request"/>
 				<c:set var="empid" value="${emp.name}" scope="request" /> -->
 			</c:forEach>
@@ -35,23 +46,25 @@
 	</table>
 
 
-<%
-for(int i=0;i<10;i++){
-	
-%>
-<h3><%=i %></h3>
-<%
-	}%>
+	<%
+		for (int i = 0; i < 10; i++) {
+	%>
+	<h3><%=i%></h3>
+	<%
+		}
+	%>
 
-<%
-List l = (List)request.getAttribute("eList");
-for(Object e:l){
-	Employee emp =(Employee)e;
-	
-%>
-<h3><%=emp.getName() %></h3>
-<%
-	}%>	
-	
+	<%
+		List l = (List) request.getAttribute("eList");
+		for (Object e : l) {
+			Employee emp = (Employee) e;
+	%>
+	<h3><%=emp.getName()%></h3>
+	<%
+		}
+	%>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
 </body>
 </html>
