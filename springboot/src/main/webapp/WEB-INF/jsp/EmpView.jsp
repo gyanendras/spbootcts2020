@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Bootstrap CSS -->
 <link
@@ -16,6 +17,8 @@
 	rel="stylesheet"
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
 	crossorigin="anonymous">
+	<script src="proj.js"></script>
+	 
 
 </head>
 <body>
@@ -29,6 +32,9 @@
 			<tr class="thead-dark">
 				<th>Name</th>
 				<th>Salary</th>
+				<th></th>
+				<th></th>
+				
 			</tr>
 			<c:forEach var="emp" items="${empList}">
 
@@ -36,9 +42,14 @@
 					<td><c:out value="${emp.name}"></c:out></td>
 					<td><c:out value="${emp.salary}"></c:out></td>
 					<td><a class="btn btn-primary" href="addcart?name=${emp.name}&sal=${emp.salary}"
-						target="_blank">Add to cart</a></td>
+						target="_blank">Add to cart</a>
+						 </td>
+		
+					<td><a class="btn btn-warning" onClick="addCartJQ('${emp.name}','${emp.salary}')">AddToCart</a></td>	
+					<td><a class="btn btn-warning" onClick="addCart('${emp.name}','${emp.salary}')">Add-To-Cart</a></td>	
+					
 				</tr>
-
+				<tr><td id="${emp.name}"></td><td></td><td></td><td></td></tr>
 				<!-- <c:set var="emplist" value="${empList}" scope="request"/>
 				<c:set var="empid" value="${emp.name}" scope="request" /> -->
 			</c:forEach>
