@@ -2,7 +2,7 @@ var xhttp = new XMLHttpRequest();
 function addCart(arg1, arg2) {
 	console.log("name is " + arg1);
 	console.log("sal is " + arg2);
-	xhttp.open("GET", "addcart?name=arg1&sal=arg2", true);
+	xhttp.open("GET", "addcart?name="+arg1+"&sal="+arg2, true);
 	xhttp.send();
 	console.log(xhttp.statusText);
 
@@ -19,3 +19,17 @@ $(document).ready(function(){
 	    $("p").hide();
 	  });
 });
+
+function addCartJQ(arg1, arg2) {
+	console.log("name is " + arg1);
+	console.log("sal is " + arg2);
+	var path =  "addcart?name="+arg1+"&sal="+arg2;
+	var texttd = "Item " + arg1 + " added to cart ";
+	$.ajax({url: path, success: function(result){
+	    $(arg1).html(texttd);
+	    console.log(result);
+	    },
+	    error: function(xhr){
+	    	console.log("An error occured: " + xhr.status + " " + xhr.statusText);
+	     }});
+}
