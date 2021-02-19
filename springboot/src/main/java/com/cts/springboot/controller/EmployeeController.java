@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cts.springboot.cts2020.Employee;
@@ -35,4 +37,13 @@ public class EmployeeController {
 	    modelAndView.addObject("emp",e);
 	    return modelAndView;
 			}
+	
+	@CrossOrigin
+	@GetMapping("/empJson")
+	@ResponseBody
+	public List<Employee> getEmpListJson() {
+		System.out.println("Inside getEmpListJson");
+		List<Employee> listEmp = empDao.getAllEmployees();
+		return listEmp;
+	}
 }
