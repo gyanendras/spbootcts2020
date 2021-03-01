@@ -2,29 +2,36 @@ package com.cts.springboot.cts2020;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Employees")
 public class Employee {
    //attributes/memeber variables/properties
+	@Id
 	private Long employeeId;
 	Double salary;
 	
 
-	LocalDate doj;
-	String fname;
-	String lname;
+	LocalDate hireDate;
+	String firstName;
+	String lastName;
 	// Address addr;
 	private static Integer retirementAge = 60;
 	
 	
     //constructors
 	public Employee(String firstName, Long id) {
-		fname = firstName;
+		firstName = firstName;
 		employeeId = id;
 	}
 	
 	//constructors
 	public Employee(String firstName,String lastName, Long id) {
-		fname = firstName;
-		lname = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		employeeId = id;
 	}
 	//constructors - default
@@ -59,6 +66,46 @@ public class Employee {
 		
 	}
 	
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public LocalDate getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(LocalDate hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
+	public static void setRetirementAge(Integer retirementAge) {
+		Employee.retirementAge = retirementAge;
+	}
+
 	public void setRetirementAge(int age) {
 		retirementAge = age;
 		
@@ -78,24 +125,19 @@ public class Employee {
 	}
 
 	public String getName() {
-		return fname +" "+ lname;
+		return firstName +" "+ lastName;
 		
 		
 	}
 	
 	public void setName(String firstName, String lastName) {
-		fname = firstName;
-		lname = lastName;
+		firstName = firstName;
+		lastName = lastName;
 	}
 	
 	public double calculateBonus() {
 		return 5*salary/100+retirementAge/10;
 	}
   
-	// Create another constructor that sets salary, 
-	//  fname, lastname and emp id
-	// Create Lina Kaur, 12, 12000.
-	//  create getSalary method and print name and salary of Lina.
-	// Use getName for name and getSalary for salary. 
-
+	
 }

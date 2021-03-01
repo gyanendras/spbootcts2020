@@ -9,13 +9,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
+
 import org.springframework.stereotype.Repository;
 
 import com.cts.springboot.cts2020.Employee;
+import com.cts.springboot.cts2020.Department;
 
 @Repository
 public class EmployeeDAO {
+	
+	 @PersistenceContext
+	    private EntityManager em;
 
 	
 	public Connection getConnection(){
@@ -101,24 +115,38 @@ public class EmployeeDAO {
 		return eList;
 	}
 	
-	//To do 
-	// code getAllDepartments() write its test case also
-	// get me all employees who lastname is "King", getEmployeesByLastName()
-	// get me all emolyess whose lastname is "Cambrault" but use prepared statement
-	// getEmpByLnameParameterized() -- preparedstatement
-	// statement, preparedstatement, callableStatement;
+	
+	public Employee getEmployee(){
+		Employee e = em.find(Employee.class, 101l);
+		return e;
+	}
+	
+	public List<Employee> getEmployeesByCrit() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+		Root<Employee> empRt = cq.from(Employee.class);
+		cq.select(empRt);
+		TypedQuery<Employee> q = em.createQuery(cq);
+		List<Employee> allEmployee = q.getResultList();
+		
+		return allEmployee;
+	}
+	
+	public List<Employee> getEmployeesJoinDeptByCrit() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+		Root<Employee> empRt = cq.from(Employee.class);
+		cq.select(empRt);
+		TypedQuery<Employee> q = em.createQuery(cq);
+		List<Employee> allEmployee = q.getResultList();
+		
+		
+		Metamodel m = em.getMetamodel();
+		 EntityType<Department> Dept_ = m.entity(Department.class);
+		 return null;
+	}
 	
 	
-	// transaction - set of statements that 
-				// should rollback together or get committed to db together
-				/* try {
-				con.setAutoCommit(false);
-				ps2.executeUpdate();
-				ps3.executeUpdate();
-				con.commit();
-				}catch(Exception e) {
-					con.rollback();
-				}*/
-	
+
 
 }

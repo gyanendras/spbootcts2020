@@ -92,5 +92,17 @@ class EmployeeDAOTest {
 		
 	}
 	
+	@Test
+	void testGetEmployee() {
+		Employee e = empdao.getEmployee();
+		System.out.println(e.getSalary());
+	}
+	
+	@Test
+	void testGetEmployeeByCrit() {
+		List<Employee> eList = empdao.getEmployeesByCrit();
+		System.out.println(eList.get(0).getName());
+	}
+	
 
 }
