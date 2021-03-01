@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
@@ -132,21 +133,24 @@ public class EmployeeDAO {
 		return allEmployee;
 	}
 	
-	public List<Employee> getEmployeesJoinDeptByCrit() {
+	public List<Employee> getEmployeesWithWhereByCrit() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
 		Root<Employee> empRt = cq.from(Employee.class);
-		cq.select(empRt);
-		TypedQuery<Employee> q = em.createQuery(cq);
-		List<Employee> allEmployee = q.getResultList();
-		
 		
 		Metamodel m = em.getMetamodel();
-		 EntityType<Department> Dept_ = m.entity(Department.class);
-		 return null;
+		EntityType<Employee> emp_ = m.entity(Employee.class);
+		Expression ex = empRt.get(emp_.getSingularAttribute("salary"));
+		Predicate eid = cb.equal(ex, "17000");
+		cq.where(eid);
+		 
+		cq.select(empRt);
+		TypedQuery<Employee> q = em.createQuery(cq);
+		List<Employee> selectEmployee = q.getResultList();
+		
+		return selectEmployee;
+	
 	}
-	
-	
 
 
 }

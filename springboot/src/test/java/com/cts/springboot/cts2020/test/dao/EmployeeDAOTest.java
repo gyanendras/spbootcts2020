@@ -104,5 +104,17 @@ class EmployeeDAOTest {
 		System.out.println(eList.get(0).getName());
 	}
 	
+	@Test
+	void testGetEmployeesWithWhereByCrit() {
+		List<Employee> eList = empdao.getEmployeesWithWhereByCrit();
+		System.out.println(eList.get(0).getName());
+	}
+	
+	@Test
+	void testGetEmployeesWithWhereAndJoinByCrit() {
+		List<Employee> eList = empdao.getEmployeesWithWhereByCrit();
+		System.out.println(eList.get(0).getName());
+	}
+	
 
 }
