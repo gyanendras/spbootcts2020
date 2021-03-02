@@ -21,6 +21,8 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.cts.springboot.cts2020.Employee;
@@ -28,10 +30,12 @@ import com.cts.springboot.cts2020.Department;
 
 @Repository
 public class EmployeeDAO {
+	private static Logger logger = LoggerFactory.getLogger(EmployeeDAO.class);
+
 	
 	 @PersistenceContext
 	    private EntityManager em;
-
+	 
 	
 	public Connection getConnection(){
 		Connection con = null;
@@ -118,7 +122,16 @@ public class EmployeeDAO {
 	
 	
 	public Employee getEmployee(){
-		Employee e = em.find(Employee.class, 101l);
+		Employee e = null;
+		try {
+		logger.info("Start getEmployee");
+		e = em.find(Employee.class, 102l);
+		logger.debug("Employee Found {} and its salary is  {} " ,e.getName(),e.getSalary());
+		
+		}catch(Exception err) {
+			
+			logger.error(err.getMessage());
+		}
 		return e;
 	}
 	
