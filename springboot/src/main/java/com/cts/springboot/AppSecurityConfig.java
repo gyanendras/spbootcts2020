@@ -3,10 +3,12 @@ package com.cts.springboot;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -18,8 +20,28 @@ public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
  	 auth.inMemoryAuthentication()
  	     .withUser("user")
 	     .password(passwordEncoder().encode("userpwd"))
-	     .roles("REG");
+	     .roles("USER")
+	     .and()
+	     .withUser("admin")
+	     .password(passwordEncoder().encode("adminpwd"))
+	     .roles("ADMIN");
 	}
+	
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests()
+		.antMatchers("/hi")
+		.hasRole("USER")
+		.antMatchers("/empJson")
+		.hasRole("ADMIN");
+		http.formLogin();
+	}
+
+	
+	
+	
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
