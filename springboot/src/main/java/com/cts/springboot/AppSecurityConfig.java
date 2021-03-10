@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.cts.springboot.cts2020.JWTAuthFilter;
+
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -35,8 +37,13 @@ public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
 		.antMatchers("/hi")
 		.hasRole("USER")
 		.antMatchers("/empJson")
-		.hasRole("ADMIN");
+		.hasRole("ADMIN")
+		.antMatchers("/hi")
+		.hasAnyRole("USER","ADMIN")
+		.antMatchers("/logout")
+		.hasAnyRole("USER","ADMIN");
 		http.formLogin();
+		http.addFilter(new JWTAuthFilter(authenticationManager()));
 	}
 
 	
