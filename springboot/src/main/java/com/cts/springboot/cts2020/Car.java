@@ -1,5 +1,7 @@
 package com.cts.springboot.cts2020;
 
+import org.springframework.stereotype.Component;
+
 public class Car {
 	String name;
 	

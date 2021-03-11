@@ -2,6 +2,7 @@ package com.cts.springboot.cts2020;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -37,6 +38,10 @@ public class JWTAuthFilter extends BasicAuthenticationFilter {
 	
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader("Authorization");
+		Enumeration en = request.getHeaderNames();
+		while(en.hasMoreElements()) {
+			System.out.println("Header name is "+en.nextElement());
+		}
 			if (token != null) {
          // parse the token. 
 			Jws<Claims> jws;
@@ -45,7 +50,7 @@ public class JWTAuthFilter extends BasicAuthenticationFilter {
 				String user = jws.getBody().getSubject();
 				ArrayList<SimpleGrantedAuthority> arr = new ArrayList<>();
 				// Get the role list from UserRepo
-				arr.add(new SimpleGrantedAuthority("ROLE_USER"));
+				arr.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 				if (user != null) {
 					return new UsernamePasswordAuthenticationToken(user, null, arr);
 				}

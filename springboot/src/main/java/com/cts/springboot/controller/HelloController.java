@@ -30,11 +30,11 @@ public class HelloController {
 	@GetMapping("/tdate")
 	public String getDate(HttpSession session) {
 		
-		Integer count = Integer.valueOf(car.getName());
+		/*Integer count = Integer.valueOf(car.getName());
 		++count;
 		session.setAttribute("count", 10);
 		car.setName(count.toString());
-		System.out.println(car.getName());
+		System.out.println(car.getName());*/
 		return "date";
 		
 	}
