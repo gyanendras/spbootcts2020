@@ -1,7 +1,10 @@
 package com.cts.springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +18,21 @@ import com.cts.springboot.cts2020.JWTAuthFilter;
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
+	
+	@Bean
+	public JWTAuthFilter getJwtF() throws Exception {
+		return new JWTAuthFilter(am);
+	}
+	
+	@Bean
+	public AuthenticationManager getAM() throws Exception {
+		return authenticationManager();
+	}
+	@Autowired
+	JWTAuthFilter jwf;
+	
+	@Autowired
+	AuthenticationManager am;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,7 +61,7 @@ public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
 		.antMatchers("/logout")
 		.hasAnyRole("USER","ADMIN");
 		http.formLogin();
-		http.addFilter(new JWTAuthFilter(authenticationManager()));
+		http.addFilter(jwf);
 	}
 
 	
