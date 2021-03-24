@@ -43,7 +43,7 @@ public class EmployeeController {
 	@ResponseBody
 	public List<Employee> getEmpListJson() {
 		System.out.println("Inside getEmpListJson");
-		List<Employee> listEmp = empDao.getAllEmployees();
+		List<Employee> listEmp = empDao.getEmployeesByCrit();
 		return listEmp;
 	}
 }

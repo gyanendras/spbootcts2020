@@ -1,0 +1,21 @@
+version: '3.3'
+services: 
+ hr-mysql: 
+  image: mysql:8.0.18 
+  ports: 
+   - "3307:3306" 
+  environment: 
+   - MYSQL_ROOT_PASSWORD=root 
+  volumes: 
+   - E:/payrolldb:/var/lib/mysql 
+   - ./dbscripts:/docker-entrypoint-initdb.d 
+ 
+ myweb-service: 
+  image: spboot-app 
+  build: springboot/. 
+  ports: 
+   - "8091:7001" 
+  depends_on: 
+   - hr-mysql 
+  links: 
+   - hr-mysql 

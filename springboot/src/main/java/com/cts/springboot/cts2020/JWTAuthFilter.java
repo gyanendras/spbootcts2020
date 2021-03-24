@@ -27,7 +27,7 @@ import io.jsonwebtoken.Jwts;
 @Component
 public class JWTAuthFilter extends BasicAuthenticationFilter {
 	
-	@Autowired
+	//@Autowired
 	AppUserRepo ar;
 	
 

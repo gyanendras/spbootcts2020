@@ -19,20 +19,22 @@ import com.cts.springboot.cts2020.JWTAuthFilter;
 @EnableWebSecurity
 public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
 	
-	@Bean
+	/*@Bean
 	public JWTAuthFilter getJwtF() throws Exception {
 		return new JWTAuthFilter(am);
-	}
+	}*/
 	
 	@Bean
 	public AuthenticationManager getAM() throws Exception {
 		return authenticationManager();
 	}
-	@Autowired
-	JWTAuthFilter jwf;
 	
-	@Autowired
-	AuthenticationManager am;
+	/*@Autowired
+	JWTAuthFilter jwf;
+	*/
+	
+	//@Autowired
+	//AuthenticationManager am;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,7 +63,7 @@ public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
 		.antMatchers("/logout")
 		.hasAnyRole("USER","ADMIN");
 		http.formLogin();
-		http.addFilter(jwf);
+		http.addFilter(new JWTAuthFilter(authenticationManager()));
 	}
 
 	
