@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class RectangleLombok {
 	//@Getter
-	//@Setter
+	//@Setter 
 	Double lenght;
 	
 	//@Getter
