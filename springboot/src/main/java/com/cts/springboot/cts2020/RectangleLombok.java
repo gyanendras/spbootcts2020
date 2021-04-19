@@ -1,5 +1,7 @@
 package com.cts.springboot.cts2020;
 
+import java.util.Arrays;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -23,6 +25,7 @@ public class RectangleLombok {
 		log.info("Calculating area");
 		log.debug("Area is {}", lenght*width);
 		return lenght*width;
+		
 		
 		
 	}
