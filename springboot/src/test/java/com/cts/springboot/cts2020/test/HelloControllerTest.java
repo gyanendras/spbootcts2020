@@ -37,7 +37,7 @@ class HelloControllerTest {
 	@Test
 	void testGetDate() throws Exception {
 		this.mockMvc.perform(get("/tdate"))
-		.andExpect(status().is(200))
+		.andExpect(status().is(200)) 
 		.andExpect(view().name("date"));
 	}
 
