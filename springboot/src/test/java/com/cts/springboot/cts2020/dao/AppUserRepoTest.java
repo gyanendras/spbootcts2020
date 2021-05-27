@@ -23,8 +23,9 @@ class AppUserRepoTest {
 	
 	@Test
 	void testCreateUser() {
-		User us = new User("user1"+Math.random()+1,"pwd1"+Math.random()+1);
-		//assertEquals(us, ao.save(us)); 
+		User us = new User("user11123"+Math.random()+1,"pwd11123"+Math.random()+1);
+		us.setId((int)(Math.random()*100+1));
+		assertEquals(us, ao.save(us)); 
 	}
 	
 

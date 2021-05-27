@@ -14,7 +14,7 @@ services:
   image: spboot-app 
   build: springboot/. 
   ports: 
-   - "8091:7001" 
+   - "8092:7001" 
   depends_on: 
    - hr-mysql 
   links: 
