@@ -35,6 +35,9 @@ public class HelloController {
 		session.setAttribute("count", 10);
 		car.setName(count.toString());
 		System.out.println(car.getName());*/
+		// set the Authorization header with token.
+		//Object objs = restTemplate("/ms1");
+		
 		return "date";
 		
 	}
